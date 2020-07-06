@@ -1,16 +1,8 @@
 package com.igor.coursemanager.network.repository
 
-import com.igor.coursemanager.model.product.Currency
-import com.igor.coursemanager.network.converter.ResponseConverter
-import com.igor.coursemanager.network.model.Request
+import com.igor.coursemanager.model.product.Currencies
 
-object Repository {
-    private val converter = ResponseConverter()
+interface Repository {
 
-    fun getCurrencies(): List<Currency> {
-        val response = Request(SOME_PATH).send()
-        return converter.convert(response, Currency::class) ?: emptyList()
-    }
+    suspend fun getCurrencies(date: String): Currencies
 }
-
-private const val SOME_PATH = "some path"

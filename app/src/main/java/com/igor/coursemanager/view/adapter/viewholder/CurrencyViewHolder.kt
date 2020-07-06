@@ -9,14 +9,14 @@ import com.igor.coursemanager.model.product.Currency
 class CurrencyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val numCodeTextView: TextView = itemView.findViewById(R.id.currency_num_code_text_view)
-    private val charCodeTextView: TextView = itemView.findViewById(R.id.currency_num_code_text_view)
-    private val nameTextView: TextView = itemView.findViewById(R.id.currency_num_code_text_view)
-    private val valueTextView: TextView = itemView.findViewById(R.id.currency_num_code_text_view)
+    private val charCodeTextView: TextView = itemView.findViewById(R.id.currency_char_code_text_view)
+    private val nameTextView: TextView = itemView.findViewById(R.id.currency_name_text_view)
+    private val valueTextView: TextView = itemView.findViewById(R.id.currency_value_text_view)
 
     fun onBind(currency: Currency) {
         numCodeTextView.text = currency.numCode.toString()
         charCodeTextView.text = currency.charCode
         nameTextView.text = currency.name
-        valueTextView.text = currency.value.toString()
+        valueTextView.text = currency.value
     }
 }

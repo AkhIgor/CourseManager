@@ -1,10 +1,10 @@
-package com.igor.coursemanager.network.converter
+package com.igor.coursemanager.network.custom.converter
 
 import android.util.Log
-import com.igor.coursemanager.converter.xml.CurrencyConverter
+import com.igor.coursemanager.custom.converter.xml.CurrencyConverter
+import com.igor.coursemanager.custom.converter.xml.XmlConverter
 import com.igor.coursemanager.model.product.Currency
 import com.igor.coursemanager.model.product.Product
-import com.igor.coursemanager.converter.xml.XmlConverter
 import kotlin.reflect.KClass
 
 class ResponseConverter {

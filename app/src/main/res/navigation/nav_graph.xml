@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/currency_fragment">
+
+    <dialog
+        android:id="@+id/datePickerDialog"
+        android:name="com.igor.coursemanager.view.fragment.DatePickerDialog"
+        android:label="DatePickerDialog" />
+
+    <fragment
+        android:id="@+id/currency_fragment"
+        android:name="com.igor.coursemanager.view.fragment.CurrencyFragment"
+        android:label="CurrencyFragment" >
+        <action
+            android:id="@+id/action_currency_fragment_to_datePickerDialog"
+            app:destination="@id/datePickerDialog" />
+    </fragment>
+</navigation>

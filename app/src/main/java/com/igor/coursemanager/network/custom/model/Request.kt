@@ -1,4 +1,4 @@
-package com.igor.coursemanager.network.model
+package com.igor.coursemanager.network.custom.model
 
 import java.io.BufferedInputStream
 import java.io.BufferedReader

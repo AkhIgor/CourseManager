@@ -1,8 +1,8 @@
-package com.igor.coursemanager.converter.xml
+package com.igor.coursemanager.custom.converter.xml
 
-import com.igor.coursemanager.converter.Converter
+import com.igor.coursemanager.custom.converter.Converter
 import com.igor.coursemanager.model.product.Product
-import java.util.IllegalFormatConversionException
+import java.util.*
 
 abstract class XmlConverter<P : Product> :
     Converter<String, List<P>> {

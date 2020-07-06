@@ -1,25 +1,31 @@
 package com.igor.coursemanager.presentation
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.igor.coursemanager.model.SimpleDate
 import com.igor.coursemanager.model.product.Currency
-import com.igor.coursemanager.network.interactor.Interactor
+import com.igor.coursemanager.network.interactor.InteractorImpl
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class CurrencyViewModel(
-    val interactor: Interactor,
     var date: SimpleDate
-) : ViewModel() {
+) : ViewModel(), LifecycleObserver {
 
-    val currencyEvent = MutableLiveData<List<Currency>>()
     val progress = MutableLiveData<Boolean>()
 
+    private val interactor = InteractorImpl()
+    private val currencyEvent = MutableLiveData<List<Currency>>()
+
+    fun getCurrencyEvent(): LiveData<List<Currency>> {
+        return currencyEvent
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun getCurrencyList() {
         progress.value = true
-        GlobalScope.launch(IO) {
+        CoroutineScope(IO).launch {
+            progress.postValue(true)
             currencyEvent.postValue(interactor.getCurrencies(date))
             progress.postValue(false)
         }

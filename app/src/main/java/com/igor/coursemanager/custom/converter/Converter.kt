@@ -1,4 +1,4 @@
-package com.igor.coursemanager.converter
+package com.igor.coursemanager.custom.converter
 
 interface Converter<FROM, TO> {
 

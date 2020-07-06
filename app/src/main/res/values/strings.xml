@@ -2,4 +2,6 @@
     <string name="app_name">Course manager</string>
 
     <string name="set_date">Изменить дату</string>
+    <string name="setting_date_cancel">Отмена</string>
+    <string name="setting_date_ok">ОК</string>
 </resources>

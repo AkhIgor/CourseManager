@@ -1,6 +1,6 @@
 package com.igor.coursemanager.view.adapter
 
-import android.view.View
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.igor.coursemanager.R
@@ -12,7 +12,8 @@ class CurrencyListAdapter(
 ) : RecyclerView.Adapter<CurrencyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {
-        val viewHolder = View.inflate(parent.context, R.layout.currency_list_item, parent)
+        val viewHolder = LayoutInflater.from(parent.context)
+            .inflate(R.layout.currency_list_item, parent, false)
         return CurrencyViewHolder(viewHolder)
     }
 

@@ -1,4 +1,4 @@
-package com.igor.coursemanager.converter.xml
+package com.igor.coursemanager.custom.converter.xml
 
 import com.igor.coursemanager.model.product.Currency
 
@@ -21,15 +21,15 @@ class CurrencyConverter : XmlConverter<Currency>() {
             name = iterator.next().getValue(NAME)
             value = iterator.next().getValue(VALUE).toDouble()
 
-            currencyList.add(
-                Currency(
-                    numCode,
-                    charCode,
-                    nominal,
-                    name,
-                    value
-                )
-            )
+//            currencyList.add(
+//                Currency(
+//                    numCode,
+//                    charCode,
+//                    nominal,
+//                    name,
+//                    value
+//                )
+//            )
         }
 
         return currencyList
