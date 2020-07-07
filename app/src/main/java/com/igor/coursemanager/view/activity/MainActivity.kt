@@ -8,12 +8,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.igor.coursemanager.R
 import com.igor.coursemanager.model.SimpleDate
+import com.igor.coursemanager.presentation.date.observer.DateObserver
 import com.igor.coursemanager.presentation.date.owner.DateOwner
 import java.util.*
 
 class MainActivity : AppCompatActivity(), DateOwner {
 
     override var date: SimpleDate = initDate()
+        set(value) {
+            observers.forEach { observer -> observer.updateObservedDate(value) }
+        }
+
+    private val observers: MutableSet<DateObserver> = mutableSetOf()
     private lateinit var navHost: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +43,10 @@ class MainActivity : AppCompatActivity(), DateOwner {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun addSubscriber(dateObserver: DateObserver) {
+        observers.add(dateObserver)
     }
 
     private fun initDate(): SimpleDate {

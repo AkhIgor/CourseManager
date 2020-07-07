@@ -9,10 +9,13 @@ import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import com.igor.coursemanager.R
 import com.igor.coursemanager.model.SimpleDate
+import com.igor.coursemanager.presentation.date.owner.DateOwner
+import com.igor.coursemanager.view.activity.MainActivity
 
 class DatePickerDialog : DialogFragment() {
 
     private lateinit var datePicker: DatePicker
+    private lateinit var dateOwner: DateOwner
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,16 +27,22 @@ class DatePickerDialog : DialogFragment() {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        dateOwner = requireActivity() as MainActivity
+    }
+
     private fun setup(view: View) {
         datePicker = view.findViewById(R.id.date_picker_view)
         view.findViewById<Button>(R.id.possitive_button).setOnClickListener {
-            setNewDate()
+            dateOwner.date = setNewDate()
             dismiss()
         }
         view.findViewById<Button>(R.id.negative_button).setOnClickListener { dialog?.cancel() }
     }
 
-    private fun setNewDate() {
+    private fun setNewDate(): SimpleDate {
         return with(datePicker) {
             SimpleDate(
                 dayOfMonth,

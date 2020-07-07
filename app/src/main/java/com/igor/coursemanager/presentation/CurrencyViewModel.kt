@@ -17,13 +17,17 @@ class CurrencyViewModel(
     private val interactor = InteractorImpl()
     private val currencyEvent = MutableLiveData<List<Currency>>()
 
+    fun updateDate(newDate: SimpleDate) {
+        date = newDate
+        getCurrencyList()
+   }
+
     fun getCurrencyEvent(): LiveData<List<Currency>> {
         return currencyEvent
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun getCurrencyList() {
-        progress.value = true
         CoroutineScope(IO).launch {
             progress.postValue(true)
             currencyEvent.postValue(interactor.getCurrencies(date))

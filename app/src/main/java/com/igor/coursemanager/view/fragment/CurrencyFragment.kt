@@ -33,6 +33,7 @@ class CurrencyFragment : Fragment(), DateObserver, LifecycleOwner {
         super.onAttach(context)
 
         dateOwner = requireActivity() as DateOwner
+        dateOwner.addSubscriber(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +57,7 @@ class CurrencyFragment : Fragment(), DateObserver, LifecycleOwner {
     }
 
     override fun updateObservedDate(newDate: SimpleDate) {
-        viewModel.date = newDate
+        viewModel.updateDate(newDate)
     }
 
     private fun initDataBinding(
@@ -94,6 +95,7 @@ class CurrencyFragment : Fragment(), DateObserver, LifecycleOwner {
         currencyListView.adapter = currencyAdapter
 
         viewModel.getCurrencyEvent().observeForever {
+            currencyList.clear()
             currencyList.addAll(it)
             currencyAdapter.notifyDataSetChanged()
         }
