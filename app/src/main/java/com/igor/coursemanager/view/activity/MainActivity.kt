@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
 import com.igor.coursemanager.R
 import com.igor.coursemanager.model.SimpleDate
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity(), DateOwner {
 
     override var date: SimpleDate = initDate()
         set(value) {
+            field = value
             observers.forEach { observer -> observer.updateObservedDate(value) }
         }
 
@@ -25,6 +27,8 @@ class MainActivity : AppCompatActivity(), DateOwner {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val toolbar = findViewById<Toolbar>(R.id.search_toolbar)
+        setSupportActionBar(toolbar)
 
         navHost = findViewById(R.id.nav_host_fragment)
     }
@@ -54,7 +58,7 @@ class MainActivity : AppCompatActivity(), DateOwner {
         val calendar = Calendar.getInstance()
         calendar.timeZone = timeZone
         val day = calendar[Calendar.DAY_OF_MONTH]
-        val month = calendar[Calendar.MONTH] + 1
+        val month = calendar[Calendar.MONTH]
         val year = calendar[Calendar.YEAR]
 
         return SimpleDate(day, month, year)

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin_little">4dp</dimen>
+    <dimen name="margin_small_x">6dp</dimen>
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_medium">16dp</dimen>
     <dimen name="margin_big">32dp</dimen>
@@ -11,6 +12,9 @@
     <dimen name="button_width">144dp</dimen>
 
     <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="text_size_medium_xx">24sp</dimen>
     <dimen name="text_size_big">28sp</dimen>
     <dimen name="text_size_giant">60sp</dimen>
+
+    <dimen name="small_icon">16dp</dimen>
 </resources>

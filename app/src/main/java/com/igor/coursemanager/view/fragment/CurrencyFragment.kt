@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
@@ -17,17 +18,25 @@ import com.igor.coursemanager.model.product.Currency
 import com.igor.coursemanager.presentation.CurrencyViewModel
 import com.igor.coursemanager.presentation.date.observer.DateObserver
 import com.igor.coursemanager.presentation.date.owner.DateOwner
+import com.igor.coursemanager.presentation.listener.CurrencyListOwner
+import com.igor.coursemanager.presentation.listener.SearchTextListener
+import com.igor.coursemanager.presentation.toolbar.ToolbarManager
+import com.igor.coursemanager.presentation.toolbar.ToolbarManagerImpl
 import com.igor.coursemanager.presentation.viewModelFactory
 import com.igor.coursemanager.view.adapter.CurrencyListAdapter
 
-class CurrencyFragment : Fragment(), DateObserver, LifecycleOwner {
+class CurrencyFragment : Fragment(), DateObserver, LifecycleOwner, CurrencyListOwner {
 
-    private var currencyList: MutableList<Currency> = mutableListOf()
+    override val currencyList: MutableList<Currency> = mutableListOf()
+
     private val currencyAdapter = CurrencyListAdapter(currencyList)
+    private val searchTextListener = SearchTextListener(this)
     private lateinit var dateOwner: DateOwner
 
     private lateinit var currencyListView: RecyclerView
     private lateinit var viewModel: CurrencyViewModel
+    private lateinit var toolbarManager: ToolbarManager
+    private lateinit var toolbar: Toolbar
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -54,6 +63,12 @@ class CurrencyFragment : Fragment(), DateObserver, LifecycleOwner {
         super.onViewCreated(view, savedInstanceState)
 
         initViews(view)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        setUpView()
     }
 
     override fun updateObservedDate(newDate: SimpleDate) {
@@ -87,17 +102,30 @@ class CurrencyFragment : Fragment(), DateObserver, LifecycleOwner {
             }
         ).get(CurrencyViewModel::class.java)
         lifecycle.addObserver(viewModel)
-    }
 
+    }
 
     private fun initViews(view: View) {
         currencyListView = view.findViewById(R.id.currency_list_view)
-        currencyListView.adapter = currencyAdapter
+        toolbar = requireActivity().findViewById(R.id.search_toolbar)
+        toolbarManager = ToolbarManagerImpl(toolbar, searchTextListener)
+    }
 
+    private fun setUpView() {
+        currencyListView.adapter = currencyAdapter
+        toolbarManager.setUpViews()
         viewModel.getCurrencyEvent().observeForever {
-            currencyList.clear()
-            currencyList.addAll(it)
-            currencyAdapter.notifyDataSetChanged()
+            updateCurrencies(it)
         }
+    }
+
+    override fun updateList(filteredList: List<Currency>) {
+        currencyAdapter.updateList(filteredList)
+    }
+
+    private fun updateCurrencies(newCurrencies: List<Currency>) {
+        currencyList.clear()
+        currencyList.addAll(newCurrencies)
+        searchTextListener.updateSearchedData(toolbarManager.searchedData())
     }
 }

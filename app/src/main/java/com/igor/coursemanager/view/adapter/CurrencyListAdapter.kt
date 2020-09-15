@@ -8,8 +8,14 @@ import com.igor.coursemanager.model.product.Currency
 import com.igor.coursemanager.view.adapter.viewholder.CurrencyViewHolder
 
 class CurrencyListAdapter(
-    private val currencies: List<Currency>
+    currencyList: List<Currency>
 ) : RecyclerView.Adapter<CurrencyViewHolder>() {
+
+    private val currencies: MutableList<Currency> = mutableListOf()
+
+    init {
+        currencies.addAll(currencyList)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {
         val viewHolder = LayoutInflater.from(parent.context)
@@ -21,5 +27,11 @@ class CurrencyListAdapter(
 
     override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int) {
         holder.onBind(currencies[position])
+    }
+
+    fun updateList(updatedList: List<Currency>) {
+        currencies.clear()
+        currencies.addAll(updatedList)
+        notifyDataSetChanged()
     }
 }
