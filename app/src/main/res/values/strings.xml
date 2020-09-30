@@ -5,5 +5,7 @@
     <string name="setting_date_cancel">Отмена</string>
     <string name="setting_date_ok">ОК</string>
 
-    <string name="search_text">Поиск</string>
+    <string name="search">Поиск</string>
+    <string name="clear">Очистить</string>
+    <string name="back">Вернуться</string>
 </resources>

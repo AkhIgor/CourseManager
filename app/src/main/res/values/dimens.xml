@@ -17,4 +17,5 @@
     <dimen name="text_size_giant">60sp</dimen>
 
     <dimen name="small_icon">16dp</dimen>
+    <dimen name="small_button">24dp</dimen>
 </resources>

@@ -3,6 +3,7 @@ package com.igor.coursemanager.presentation.listener
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
+import com.igor.coursemanager.presentation.debounce.Debouncer
 import com.igor.coursemanager.util.actionWithDebounce
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
@@ -14,10 +15,11 @@ class SearchTextListener(
 ) : TextWatcher {
 
     private var observe = true
+    private val debouncer = Debouncer()
 
     override fun afterTextChanged(searchedText: Editable?) {
         if (observe && searchedText.toString().isNotBlank()) {
-            actionWithDebounce {
+            debouncer.actionWithDebounce {
                 val searchedList = search(searchedText.toString().trim())
                 withContext(Main) {
                     listOwner.updateList(searchedList)
@@ -54,5 +56,3 @@ class SearchTextListener(
             }
         } else listOwner.currencyList
 }
-
-const val EMPTY_STRING = ""

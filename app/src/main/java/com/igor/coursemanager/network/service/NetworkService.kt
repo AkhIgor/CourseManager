@@ -16,6 +16,4 @@ object NetworkService {
         retrofit.create(CentralBankApi::class.java)
 }
 
-private const val BASE_URL = "https://www.cbr.ru/scripts/"
-
-private const val TEST_URL = "https://www.cbr.ru/scripts/XML_daily.asp?date_req=06/07/2020"
+private const val BASE_URL = "https://degtyarev-180620:B6h2Wa6L@api.vetrf.ru/platform/services/2.0/"

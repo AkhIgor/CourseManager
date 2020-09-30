@@ -8,6 +8,8 @@ object RepositoryImpl : Repository {
 
     private val centralBankApi: CentralBankApi = NetworkService.centralBankApi()
 
-    override suspend fun getCurrencies(date: String): Currencies =
-        centralBankApi.getCurrencies(date)
+    override suspend fun getCurrencies(date: String): Currencies {
+        println(centralBankApi.authorize())
+        return Currencies()
+    }
 }
