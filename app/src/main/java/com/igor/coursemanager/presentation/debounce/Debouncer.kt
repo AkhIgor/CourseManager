@@ -3,7 +3,7 @@ package com.igor.coursemanager.presentation.debounce
 import kotlinx.coroutines.delay
 
 class Debouncer(
-    private val debounceTime: Long = 10_000L
+    private val debounceTime: Long = 400L
 ) {
     var executing: Boolean = false
 

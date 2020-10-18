@@ -8,7 +8,4 @@ interface CentralBankApi {
 
     @POST("XML_daily.asp")
     suspend fun getCurrencies(@Query("date_req") date: String): Currencies
-
-    @POST("ApplicationManagementService")
-    suspend fun authorize(): String
 }

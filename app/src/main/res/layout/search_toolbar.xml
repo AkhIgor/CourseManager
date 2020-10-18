@@ -17,7 +17,6 @@
             android:layout_marginTop="@dimen/margin_small_x"
             android:layout_marginBottom="@dimen/margin_little"
             android:gravity="bottom"
-            android:visibility="gone"
             android:orientation="horizontal">
 
             <TextView
